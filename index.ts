@@ -1,11 +1,13 @@
 import express, { Request, response, Response } from 'express';
-import ejs from 'ejs';
 import fetch from 'node-fetch';
 import parser from 'html-metadata-parser'
+import {GoogleAuth} from 'google-auth-library'
+import {google} from 'googleapis'
 
 const app = express();
 const port = 8080;
 // app.set('view engine', 'ejs');
+
 
 export const metaDataRequest = async(req: Request, res: Response) =>{
   const url = req.query.url as string
@@ -26,9 +28,7 @@ export const metaDataRequest = async(req: Request, res: Response) =>{
   }
 }
 
-app.get('/metadata', metaDataRequest)
-
-
+app.get('/metadata', metaDataRequest) 
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
